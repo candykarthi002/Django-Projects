@@ -1,0 +1,21 @@
+{% extends 'polls/base.html' %}
+
+{% block content %}
+<div class="jumbotron">
+  <h1 class="display-4">{{ question.question_text }}</h1>
+  <hr class="my-4 bg-dark">
+
+  <ul class="list-group">
+    {% for choice in question.choice_set.all %}
+    <li class="list-group-item">
+      <h4 class="lead">{{ choice.choice_text }}</h4>
+      <div class="progress">
+        <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary" role="progressbar" style="width: {{ choice.votes }}rem;" >{{ choice.votes }}</div>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+
+  <a href="{% url 'polls:details' question.id %}" class="btn btn-primary my-3">Vote again?</a>
+</div>
+{% endblock %}
